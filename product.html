@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Website Name — Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-page">
+    <div id="loginView" class="admin-login">
+        <div class="login-visual">
+            <div class="login-mark">✳</div>
+            <div class="login-visual-copy"><span>Website Name</span>
+                <h1>Manage your<br>store <em>simply.</em></h1>
+                <p>Add products, update stock and keep your collection fresh — without touching code.</p>
+            </div><small>© 2026 Website Name</small>
+        </div>
+        <div class="login-form-side">
+            <div class="login-form-box">
+                <div class="login-logo">Website <span>Name</span></div>
+                <div class="login-kicker">PRIVATE STORE ACCESS</div>
+                <h2>Welcome <em>Back.</em></h2>
+                <p>Sign in to manage your products, orders and store.</p>
+                <form onsubmit="adminLogin(event)"><label>ADMIN EMAIL<input id="email" type="email"
+                            placeholder="Enter your email" required></label><label>PASSWORD<input id="password"
+                            type="password" placeholder="Enter password" required></label><button
+                        class="dash-btn primary full">LOGIN NOW
+                        <span>→</span></button></form>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardView" class="dashboard hidden">
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-logo">Website <span>Name</span></div>
+            <div class="store-status"><span></span> STORE ONLINE</div>
+            <nav><a class="side-link active" data-section="overview" onclick="switchSection('overview')"><b>⌂</b>
+                    Dashboard</a><a class="side-link" data-section="products"
+                    onclick="switchSection('products')"><b>□</b>
+                    Products</a><a class="side-link" data-section="orders" onclick="switchSection('orders')"><b>≡</b>
+                    Orders <span id="sideOrderCount">0</span></a><a class="side-link" data-section="settings"
+                    onclick="switchSection('settings')"><b>⚙</b> Settings</a></nav>
+            <div class="sidebar-bottom"><a href="index.html" target="_blank">View Store ↗</a><button
+                    onclick="adminLogout()">Log out</button></div>
+        </aside>
+        <div id="dashOverlay" class="dash-overlay" onclick="closeSidebar()"></div>
+        <div class="dash-content">
+            <header class="dash-header"><button class="dash-mobile-menu" onclick="openSidebar()">☰</button>
+                <div><span class="mobile-brand">Website Name</span><span class="dash-date" id="dashDate"></span></div>
+                <div class="dash-header-right"><a href="index.html" target="_blank">VIEW STORE ↗</a><button
+                        class="profile-chip">Z<span>ADMIN</span></button></div>
+            </header>
+            <main class="dash-main">
+                <section id="section-overview" class="dash-section active">
+                    <div class="page-head">
+                        <div><span class="dash-kicker">CONTROL CENTRE</span>
+                            <h1>Good morning, <em>Admin.</em></h1>
+                            <p>Here's what's happening with your store today.</p>
+                        </div><button class="dash-btn primary" onclick="switchSection('products');newProduct()">+ ADD
+                            NEW
+                            PRODUCT</button>
+                    </div>
+                    <div class="stat-grid">
+                        <div class="dash-stat purple"><span>TOTAL PRODUCTS</span><strong
+                                id="sProducts">0</strong><small>In your
+                                catalogue</small></div>
+                        <div class="dash-stat green"><span>IN STOCK</span><strong id="sStock">0</strong><small>Products
+                                available</small></div>
+                        <div class="dash-stat orange"><span>LOW STOCK</span><strong id="sLow">0</strong><small>5 pieces
+                                or
+                                less</small></div>
+                        <div class="dash-stat red"><span>ORDERS</span><strong id="sOrders">0</strong><small>Demo orders
+                                received</small></div>
+                    </div>
+                    <div class="dash-grid-two">
+                        <div class="dash-card quick-card">
+                            <div class="card-head">
+                                <div><span class="dash-kicker">QUICK ACTION</span>
+                                    <h2>Update your store</h2>
+                                </div><span class="card-icon">+</span>
+                            </div>
+                            <div class="quick-actions"><button
+                                    onclick="switchSection('products');newProduct()"><b>＋</b><span>Add
+                                        product<small>Create a new item</small></span><i>→</i></button><button
+                                    onclick="switchSection('products')"><b>□</b><span>Manage products<small>Edit price &
+                                            stock</small></span><i>→</i></button><button
+                                    onclick="switchSection('orders')"><b>≡</b><span>View
+                                        orders<small>Check customer details</small></span><i>→</i></button></div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="card-head">
+                                <div><span class="dash-kicker">HOW IT WORKS</span>
+                                    <h2>3 simple steps</h2>
+                                </div>
+                            </div>
+                            <div class="mini-steps">
+                                <div><b>01</b><span>ADD</span><small>Product details & photos</small></div>
+                                <div><b>02</b><span>PUBLISH</span><small>Make it live on store</small></div>
+                                <div><b>03</b><span>SELL</span><small>Receive customer orders</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-head">
+                            <div><span class="dash-kicker">LATEST PRODUCTS</span>
+                                <h2>Recently added</h2>
+                            </div><button class="text-btn" onclick="switchSection('products')">VIEW ALL →</button>
+                        </div>
+                        <div id="recentProducts" class="recent-products"></div>
+                    </div>
+                </section>
+
+                <section id="section-products" class="dash-section">
+                    <div class="page-head">
+                        <div><span class="dash-kicker">CATALOGUE</span>
+                            <h1>Products <em>Manager.</em></h1>
+                            <p>Add, edit or remove products from your store.</p>
+                        </div><button class="dash-btn primary" onclick="newProduct()">+ ADD PRODUCT</button>
+                    </div>
+                    <div class="product-manager">
+                        <div class="manager-toolbar">
+                            <div class="search-box">⌕ <input id="productSearch" oninput="renderAdminProducts()"
+                                    placeholder="Search products..."></div><select id="productFilter"
+                                onchange="renderAdminProducts()">
+                                <option value="All">All categories</option>
+                                <option>Shirts</option>
+                                <option>Trousers</option>
+                                <option>Accessories</option>
+                            </select>
+                        </div>
+                        <div id="adminProducts" class="admin-product-list"></div>
+                    </div>
+                </section>
+
+                <section id="section-orders" class="dash-section">
+                    <div class="page-head">
+                        <div><span class="dash-kicker">CUSTOMER ORDERS</span>
+                            <h1>Order <em>Inbox.</em></h1>
+                            <p>Orders submitted from the demo checkout appear here.</p>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div id="ordersList" class="orders-list"></div>
+                    </div>
+                </section>
+
+                <section id="section-settings" class="dash-section">
+                    <div class="page-head">
+                        <div><span class="dash-kicker">STORE SETTINGS</span>
+                            <h1>Store <em>Details.</em></h1>
+                            <p>Basic information shown to customers.</p>
+                        </div>
+                    </div>
+                    <div class="dash-card settings-card">
+                        <div class="settings-row"><span>Store name</span><strong>Website Name</strong></div>
+                        <div class="settings-row"><span>Order WhatsApp</span><strong>+92 346 8890002</strong></div>
+                        <div class="settings-row"><span>Categories</span><strong>Shirts · Trousers ·
+                                Accessories</strong></div>
+                        <div class="settings-row"><span>Frontend mode</span><strong>Demo / Local Storage</strong></div>
+                        <div class="notice"><b>Important:</b> This demo stores products and orders in the browser. Once
+                            the client
+                            approves the design, connect Laravel + MySQL + real image storage for shared admin access.
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div id="productModal" class="dash-modal">
+        <div class="product-modal-panel">
+            <div class="modal-head">
+                <div><span class="dash-kicker">PRODUCT MANAGEMENT</span>
+                    <h2 id="formTitle">Add <em>Product</em></h2>
+                </div><button onclick="closeProductModal()">×</button>
+            </div>
+            <form onsubmit="saveProduct(event)"><input type="hidden" id="editId">
+                <div class="modal-grid"><label>PRODUCT NAME<input id="pName" required
+                            placeholder="e.g. Signature Oxford Shirt"></label><label>CATEGORY<select id="pCategory">
+                            <option>Shirts</option>
+                            <option>Trousers</option>
+                            <option>Accessories</option>
+                        </select></label><label>NEW PRICE (PKR)<input id="pPrice" type="number" min="0" required
+                            placeholder="3490"></label><label>OLD PRICE (PKR)<input id="pOldPrice" type="number" min="0"
+                            placeholder="4490"></label><label>STOCK PIECES<input id="pStock" type="number" min="0"
+                            required placeholder="12"></label><label>STATUS<select id="pStatus">
+                            <option value="live">LIVE — SHOW ON STORE</option>
+                            <option value="hidden">HIDDEN — DON'T SHOW</option>
+                        </select></label><label class="modal-wide">AVAILABLE SIZES<div class="size-checks"><label><input
+                                    type="checkbox" value="S"> S</label><label><input type="checkbox" value="M">
+                                M</label><label><input type="checkbox" value="L"> L</label><label><input type="checkbox"
+                                    value="XL"> XL</label><label><input type="checkbox" value="XXL"> XXL</label></div>
+                        </label><label class="modal-wide">DESCRIPTION<textarea id="pDescription"
+                            placeholder="Write a short description customers will see..."></textarea></label>
+                    <div class="modal-wide"><span class="upload-title">PRODUCT PHOTOS <small>Up to 3
+                                angles</small></span>
+                        <div class="upload-grid"><label class="upload-box"><input id="img1" type="file" accept="image/*"
+                                    onchange="preview(this,'prev1')"><span id="prev1">＋<b>Front</b><small>Click to
+                                        upload</small></span></label><label class="upload-box"><input id="img2"
+                                    type="file" accept="image/*" onchange="preview(this,'prev2')"><span
+                                    id="prev2">＋<b>Back</b><small>Click to
+                                        upload</small></span></label><label class="upload-box"><input id="img3"
+                                    type="file" accept="image/*" onchange="preview(this,'prev3')"><span
+                                    id="prev3">＋<b>Detail</b><small>Click to
+                                        upload</small></span></label></div>
+                    </div>
+                </div>
+                <div class="modal-actions"><button type="button" class="dash-btn ghost"
+                        onclick="closeProductModal()">CANCEL</button><button class="dash-btn primary" id="saveBtn">SAVE
+                        & PUBLISH
+                        →</button></div>
+            </form>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+
+</html>
