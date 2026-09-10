@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Name — Modern Menswear</title>
+  <meta name="description" content="Website Name — Shirts, Trousers and Accessories." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="announcement">COMPLIMENTARY DELIVERY ON ORDERS ABOVE PKR 5,000</div>
+  <header class="site-header">
+    <a class="brand" href="#home">Website <span>Name</span></a>
+    <nav id="desktopNav">
+      <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#collection">COLLECTION</a><a href="#contact">CONTACT</a><a href="admin.html" class="admin-link">ADMIN</a>
+    </nav>
+    <div class="header-actions"><button class="cart-btn" onclick="openCart()">BAG <span id="cartCount">0</span></button><button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()"><span></span><span></span><span></span></button></div>
+  </header>
+
+  <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-top"><span class="brand">Website <span>Name</span></span><button onclick="toggleMenu()">×</button></div>
+    <div class="mobile-nav">
+      <a href="#home" onclick="toggleMenu()"><small>01</small> HOME <span>↗</span></a>
+      <a href="#about" onclick="toggleMenu()"><small>02</small> ABOUT <span>↗</span></a>
+      <a href="#collection" onclick="toggleMenu()"><small>03</small> COLLECTION <span>↗</span></a>
+      <a href="#contact" onclick="toggleMenu()"><small>04</small> CONTACT <span>↗</span></a>
+      <a href="admin.html"><small>05</small> ADMIN <span>↗</span></a>
+    </div>
+    <div class="mobile-menu-foot">MODERN MENSWEAR · GUJRAT · PAKISTAN</div>
+  </div>
+  <div id="menuOverlay" class="menu-overlay" onclick="toggleMenu()"></div>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">THE NEW MENSWEAR EDIT</p>
+        <h1>QUIETLY<br><em>CONFIDENT.</em></h1>
+        <p class="hero-text">Refined essentials for everyday movement. Clean shirts, trousers and accessories made to stay in rotation.</p>
+        <a href="#collection" class="button">SHOP THE COLLECTION <span>↗</span></a>
+      </div>
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85" alt="Minimal menswear fashion" />
+        <div class="photo-caption"><span>ZOOM / 01</span><span>EVERYDAY ESSENTIALS</span></div>
+      </div>
+    </section>
+
+    <section class="category-strip">
+      <a href="#collection" onclick="filterCategory('Shirts')"><span>01</span> SHIRTS <b>↗</b></a>
+      <a href="#collection" onclick="filterCategory('Trousers')"><span>02</span> TROUSERS <b>↗</b></a>
+      <a href="#collection" onclick="filterCategory('Accessories')"><span>03</span> ACCESSORIES <b>↗</b></a>
+    </section>
+
+    <section id="about" class="about section">
+      <div class="section-tag">01 / ABOUT US</div>
+      <div class="about-grid"><h2>BUILT FOR<br><em>EVERYDAY.</em></h2><div><p>Website Name is a modern menswear concept focused on clean silhouettes, versatile pieces and an elevated everyday wardrobe.</p><p>From essential shirts to tailored trousers and understated accessories, every edit is made to work together.</p></div></div>
+    </section>
+
+    <section id="collection" class="collection section">
+      <div class="section-head"><div><div class="section-tag">02 / COLLECTION</div><h2>THE CURRENT <em>EDIT</em></h2></div><div class="filters"><button class="active" onclick="filterCategory('All')">ALL</button><button onclick="filterCategory('Shirts')">SHIRTS</button><button onclick="filterCategory('Trousers')">TROUSERS</button><button onclick="filterCategory('Accessories')">ACCESSORIES</button></div></div>
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <section class="statement"><p>LESS NOISE.<br><em>MORE STYLE.</em></p></section>
+
+    <section id="contact" class="contact section"><div class="section-tag">03 / CONTACT</div><div class="contact-grid"><h2>LET'S TALK<br><em>STYLE.</em></h2><div><p>For orders, wholesale enquiries or collaborations.</p><a href="mailto:hello@website name.pk">HELLO@WEBSITENAME.PK ↗</a><br><a href="https://wa.me/923468890002" target="_blank" rel="noopener">WHATSAPP ORDERS ↗</a></div></div></section>
+  </main>
+  <footer><div class="brand">Website <span>Name</span></div><p>© 2026 WEBSITE NAME. ALL RIGHTS RESERVED.</p></footer>
+
+  <div id="cartModal" class="modal"><div class="modal-panel"><button class="close" onclick="closeCart()">×</button><div class="section-tag">YOUR BAG</div><h2>SHOPPING <em>BAG</em></h2><div id="cartItems"></div><div class="cart-total"><span>TOTAL</span><strong id="cartTotal">PKR 0</strong></div><button class="button full" onclick="goCheckout()">PROCEED TO CHECKOUT ↗</button></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
